@@ -36,7 +36,7 @@
                         {!! Form::open([ 'route' => [ 'conversor.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
                         {!! Form::close() !!}
                             <div class="pt-2 mx-auto">
-                                <a href="#" class="btn btn-primary">Descargar</a>
+                                <a href="{{ route('conversor.dwnld') }}" class="btn btn-primary">Descargar</a>
                             </div>
                     </div>
                     <div class="card-footer text-muted">

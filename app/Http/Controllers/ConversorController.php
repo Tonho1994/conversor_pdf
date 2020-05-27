@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Imagick;
+use Imagick;
 
 class ConversorController extends Controller
 {
@@ -13,9 +13,18 @@ class ConversorController extends Controller
     }
     public function save(Request $request){
         $image = $request->file('file');
-
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('img'),$imageName);
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('storage/image'),$imageName);
+        $file = public_path('storage/image/'.$imageName);
+        $image = new Imagick($file);
+        $image->setImageFormat('pdf');
+        $image->writeImage(public_path('storage/pdf/'.substr($imageName,0,-4).'.pdf'));
+        unlink(public_path('storage/image/'.$imageName));
         return response()->json(['success'=>$imageName]);
+    }
+    public function download(){
+        $files = array_slice(scandir(public_path('storage/pdf')), 2);
+        dd($files);
+
     }
 }
