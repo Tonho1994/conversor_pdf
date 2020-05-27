@@ -23,8 +23,29 @@ class ConversorController extends Controller
         return response()->json(['success'=>$imageName]);
     }
     public function download(){
-        $files = array_slice(scandir(public_path('storage/pdf')), 2);
-        dd($files);
+        $files = sizeof(glob(public_path('storage/pdf/*')));
+        if($files==1){
+            $headers = ['Content-Type' => 'application/pdf',];
+            $filename = array_slice(scandir(public_path('storage/pdf')), 2);
+            $file=(glob(public_path('storage/pdf/*')));
+            return response()->download($file[0], $filename[0], $headers);
+        }
+        else if ($files>=2){
 
+        }
+        else if ($files==0){
+            return response()->json(['error'=> 'no hay imagenes']);
+        }
     }
 }
+
+/* //Borra los archivos de la carpeta de los pdfs
+public function download(){
+    $files = glob(public_path('storage/pdf/*'));
+    foreach($files as $file){ // iterate files
+        if(is_file($file))
+          unlink($file); // delete file
+      }
+    dd($files);
+
+} */
