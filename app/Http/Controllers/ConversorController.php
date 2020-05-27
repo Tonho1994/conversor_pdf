@@ -13,8 +13,9 @@ class ConversorController extends Controller
     }
     public function save(Request $request){
         $image = $request->file('file');
+
         $imageName = time().'.'.$image->extension();
-        $image->move(public_path('storage/image'),$imageName);
+        $image->move(public_path('img'),$imageName);
         return response()->json(['success'=>$imageName]);
     }
 }
