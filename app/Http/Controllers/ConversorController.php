@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Imagick;
+use ZipArchive;
 
 class ConversorController extends Controller
 {
@@ -31,6 +32,22 @@ class ConversorController extends Controller
             return response()->download($file[0], $filename[0], $headers);
         }
         else if ($files>=2){
+            unlink(public_path('storage/zip/test.zip'));
+            $zip = new ZipArchive();
+            $filename=public_path('storage/zip/test.zip');
+            if($zip->open($filename,ZIPARCHIVE::CREATE)===true){
+                $files = glob(public_path('storage/pdf/*'));
+                foreach($files as $file){
+                    $zip->addFile($file);
+                }
+                $zip->close();
+                foreach($files as $file){
+                    if(is_file($file))
+                        unlink($file); // delete file
+                }
+                $headers = ['Content-Type' => 'application/pdf',];
+                return response()->download(public_path('storage/zip/test.zip'),'test.zip', $headers);
+            }
 
         }
         else if ($files==0){
