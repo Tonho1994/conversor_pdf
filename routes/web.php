@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/conversor','ConversorController@vista');
+Route::post('/conversor/save   ','ConversorController@save')->name('conversor.save');

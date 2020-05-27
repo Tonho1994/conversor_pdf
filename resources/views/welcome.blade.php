@@ -10,7 +10,40 @@
         <script src="{{ asset('js/dropzone.js') }}"></script>
     </head>
     <body>
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <h1 class="display-4 text-center">Conversor pdf</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Imagen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">docx</a>
+                    </li>
+                    <li class="nav-item">
+                        {{-- <a class="nav-link" href="#">Todos</a> --}}
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Puedes Subir hasta 3 imágenes</h5>
+                {!! Form::open([ 'route' => [ 'conversor.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'image-upload' ]) !!}
+                {!! Form::close() !!}
 
+                <a href="#" class="btn btn-primary">Descargar</a>
+            </div>
+            <div class="card-footer text-muted">
+                3 Archivos de Maximo 2MB. Los formatos permitidos son: .jpeg .png. jpg
+            </div>
+            </div>
+    </div>
+</div>
         <script src="{{ asset('js/jquery-3.5-1.js') }}"></script>
         <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
     </body>
