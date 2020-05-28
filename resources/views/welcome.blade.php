@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
         <title>{{ env('APP_NAME') }}</title>
         <link rel="icon" type="image/png" href="{{ asset('img/icono-pdf.png') }}" />
@@ -29,7 +30,7 @@
                         </ul>
                     </div>
                     <div class="card-body" id ="">
-                        <h5 class="card-title">Puedes Subir hasta 3 imágenes</h5>
+                        <h5 class="card-title">Puedes Subir hasta 6 Imágenes</h5>
                         {!! Form::open([ 'route' => [ 'conversor.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
                         {!! Form::close() !!}
                             <div class="pt-2 mx-auto">
@@ -37,7 +38,7 @@
                             </div>
                     </div>
                     <div class="card-footer text-muted">
-                        3 Archivos de Máximo 2MB. Los formatos permitidos son: .jpeg .png. jpg
+                        6 Archivos de Máximo 2MB. Los formatos permitidos son: .jpeg .png. jpg
                     </div>
                 </div>
             </div>
@@ -45,14 +46,33 @@
         <script type="text/javascript">
             Dropzone.options.myAwesomeDropzone = {
                 maxFilesize: 2,
-                maxFiles: 3,
+                maxFiles: 6,
                 acceptedFiles: ".jpeg,.jpg,.png",
-                addRemoveLinks: true,
+                filesizeBase: 1024,
                 dictDefaultMessage:"Suelta los archivos para cargarlos automáticamente o da clíck",
                 dictFileTooBig:"El archivo es muy grande",
                 dictInvalidFileType:"Tipo de Archivo Invalido",
                 dictRemoveFile:"Borrar",
-                dictMaxFilesExceeded:"Máximo de archivos superado"
+                dictMaxFilesExceeded:"Máximo de archivos superado",
+                addRemoveLinks: true,
+                removedfile: function(file){
+                    var name = file.name;
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "conversor/delete",
+                        type: "POST",
+                        data: {
+                            "name" : name
+                        },
+                        sucess: function(data){
+                            console.log('success: ' + data);
+                        }
+                    });
+                    var _ref;
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                }
             };
         </script>
         <script src="{{ asset('js/jquery-3.5-1.js') }}"></script>

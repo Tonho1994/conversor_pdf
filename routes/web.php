@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/conversor','ConversorController@vista')->name('conversor.vista');
 Route::post('/conversor/save','ConversorController@save')->name('conversor.save');
 Route::get('/conversor/download','ConversorController@download')->name('conversor.dwnld');
+Route::post('/conversor/delete','ConversorController@delete')->name('conversor.delete');
 
 Route::get('/conversordoc','ConversorDocController@vista')->name('conversordoc.vista');
 Route::post('/conversordoc/save','ConversorDocController@save')->name('conversordoc.save');
