@@ -26,3 +26,4 @@ Route::post('/conversor/delete','ConversorController@delete')->name('conversor.d
 Route::get('/conversordoc','ConversorDocController@vista')->name('conversordoc.vista');
 Route::post('/conversordoc/save','ConversorDocController@save')->name('conversordoc.save');
 Route::get('/conversordoc/download','ConversorDocController@download')->name('conversordoc.dwnld');
+Route::post('/conversordoc/delete','ConversorDocController@delete')->name('conversordoc.delete');

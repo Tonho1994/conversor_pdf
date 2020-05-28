@@ -73,7 +73,7 @@ class ConversorController extends Controller
 
         else if ($files>=2){                                                    //si son mas de dos archivos se van a agregar a un zip
             $files = sizeof(glob(public_path('storage/zip/*')));                //eliminamos los archivos en la carpeta de zip
-            if ($files>=1){                                                     //si hay archivos en la carpeta de pdfs
+            if ($files>=1){                                                     //si hay archivos en la carpeta de zip
                 $files = glob(public_path('storage/zip/*'));
                 foreach($files as $file){                                       //se eliminaran todos los archivos en la carpeta zip
                     unlink($file);
