@@ -21,23 +21,23 @@
                     <div class="card-header">
                         <ul class="nav nav-pills card-header-pills">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Imágen</a>
+                                <a class="nav-link" href="{{ route('conversor.vista') }}">Imágen</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('conversordoc.vista') }}">Documento</a>
+                                <a class="nav-link active" href="#">Documento</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body" id ="">
-                        <h5 class="card-title">Puedes Subir hasta 3 imágenes</h5>
-                        {!! Form::open([ 'route' => [ 'conversor.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
+                        <h5 class="card-title">Puedes Subir hasta 3 Documentos</h5>
+                        {!! Form::open([ 'route' => [ 'conversordoc.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
                         {!! Form::close() !!}
-                            <div class="pt-2 mx-auto">
-                                <a href="{{ route('conversor.dwnld') }}" class="btn btn-primary">Descargar</a>
-                            </div>
+                        <div class="pt-2 mx-auto">
+                            <a href="{{ route('conversordoc.dwnld') }}" class="btn btn-primary">Descargar</a>
+                        </div>
                     </div>
                     <div class="card-footer text-muted">
-                        3 Archivos de Máximo 2MB. Los formatos permitidos son: .jpeg .png. jpg
+                        3 Archivos de Máximo 2MB. Los formatos permitidos son: .doc .docx. odt .ppt .pptx .odp
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             Dropzone.options.myAwesomeDropzone = {
                 maxFilesize: 2,
                 maxFiles: 3,
-                acceptedFiles: ".jpeg,.jpg,.png",
+                acceptedFiles: ".docx,.doc,.odt,.pptx,.ppt,.odp",
                 addRemoveLinks: true,
                 dictDefaultMessage:"Suelta los archivos para cargarlos automáticamente o da clíck",
                 dictFileTooBig:"El archivo es muy grande",

@@ -10,17 +10,24 @@ class ConversorController extends Controller
 {
     //
     public function vista(){
-        return view('conversor');
+        $files = sizeof(glob(public_path('storage/pdf/*')));
+        if ($files>=1){//si hay archivos en la carpeta de pdfs los elimina al cargr la vista
+            $files = glob(public_path('storage/pdf/*'));
+            foreach($files as $file){
+                unlink($file);
+            }
+        }
+        return view('welcome');
     }
     public function save(Request $request){
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
-        $image->move(public_path('storage/image'),$imageName);
+        $image->move(public_path('storage/image'),$imageName);//almacenamos, con el nombre original, el archivo en image
         $file = public_path('storage/image/'.$imageName);
         $image = new Imagick($file);
-        $image->setImageFormat('pdf');
-        $image->writeImage(public_path('storage/pdf/'.substr($imageName,0,-4).'.pdf'));
-        unlink(public_path('storage/image/'.$imageName));
+        $image->setImageFormat('pdf');//lo transformamos a pdf
+        $image->writeImage(public_path('storage/pdf/'.substr($imageName,0,-4).'.pdf'));//almacenamos el nuevo archivo pdf
+        unlink(public_path('storage/image/'.$imageName));//eliminamos el archivo en images
         return response()->json(['success'=>$imageName]);
     }
     public function download(){
@@ -48,7 +55,6 @@ class ConversorController extends Controller
                 $headers = ['Content-Type' => 'application/pdf',];
                 return response()->download(public_path('storage/zip/test.zip'),'test.zip', $headers);
             }
-
         }
         else if ($files==0){
             return response()->json(['error'=> 'no hay imagenes']);
