@@ -8,7 +8,6 @@
         <link rel="icon" type="image/png" href="{{ asset('img/icono-pdf.png') }}" />
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
-        <script src="{{ asset('js/dropzone.js') }}"></script>
     </head>
     <body>
         <div class="row">
@@ -46,6 +45,7 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/dropzone.js') }}"></script>
         <script type="text/javascript">
             Dropzone.options.myAwesomeDropzone = {
                 maxFilesize: 2,
