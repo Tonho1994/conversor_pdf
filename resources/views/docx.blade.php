@@ -31,8 +31,11 @@
                     </div>
                     <div class="card-body" id ="">
                         <h5 class="card-title">Puedes Subir hasta 6 Documentos</h5>
-                        {!! Form::open([ 'route' => [ 'conversordoc.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
-                        {!! Form::close() !!}
+                        {{-- {!! Form::open([ 'route' => [ 'conversordoc.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
+                        {!! Form::close() !!} --}}
+                        <form method="post" action="{{  route('conversordoc.save')  }}" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
+                            @csrf
+                        </form>
                             <div class="pt-2 mx-auto">
                                 <a href="{{ route('conversordoc.dwnld') }}" class="btn btn-primary">Descargar</a>
                             </div>

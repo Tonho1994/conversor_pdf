@@ -31,8 +31,9 @@
                     </div>
                     <div class="card-body" id ="">
                         <h5 class="card-title">Puedes Subir hasta 6 Imágenes</h5>
-                        {!! Form::open([ 'route' => [ 'conversor.save' ], 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'my-awesome-dropzone' ]) !!}
-                        {!! Form::close() !!}
+                        <form method="post" action="{{  route('conversor.save')  }}" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
+                            @csrf
+                        </form>
                             <div class="pt-2 mx-auto">
                                 <a href="{{ route('conversor.dwnld') }}" class="btn btn-primary">Descargar</a>
                             </div>
